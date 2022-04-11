@@ -20,6 +20,15 @@ App.js
 Here, I have created 3 inputs and their state is managed by the custom hooks. We can also add other fields such as label,name,errorMessage and isValid field to the custom hook and use the hook in our app.
 
 ### 2) What will be the output for the below code if myState is incremented 5 times before scrolling?
+```javascript
+const [state, setState] = React.useState(0);
+const listener = () => {
+console.log(`State: ${state}`);
+};
+React.useEffect(() => {
+window.addEventListener("scroll", listener);
+}, []);
+```
 The updated state of the component will be 5, but still the output will always be “Scroll: 0” because when the addEventListener is binded to it, the state of the component is 0, and the useEffect with no dependancy only runs for the initial state. i.e when component gets mounted. And even if there was state in the dependancy of the useEffect, there would be 2 addEventListeners attatched to scrolling as there is no cleanup function in the useEffect, so the output would be “State: 0”and “State: 5”.
 
 ### 3) How to implement componentWillUnmount in functional components?
@@ -29,6 +38,15 @@ Its implementation is as follows -:
 ![image](https://user-images.githubusercontent.com/82509612/162847710-faa1950a-120c-435d-b55c-5f0196a5a59a.png)
 
 ### 4) What is the difference between the below snippets?
+```javascript
+const [state, setState] = useState(0);
+setState((state) => state + 1);
+```
+```javascript
+const [state, setState] = useState(0);
+setState(state + 1);
+```
+
 Both the code snippets give the same result, but using the prevState argument can be helpful in the case of the state being in the form of an object and when you need to use or change just some properties of the object instead of making a new object and setting it to the state.
 This is implemented as follows -:
 
@@ -45,6 +63,12 @@ Another efficeint way of using promises in a loop is by using Promise.all method
 ![image](https://user-images.githubusercontent.com/82509612/162847794-bdb2b7d0-394d-42fc-bb7e-400fd77d1194.png)
 
 ### 6) Which component will be rendered when you visit /products ?
+```javascript
+<Swtich>
+  <Route path="/" component={Home} />
+  <Route path="/products" component={Product} />
+</Switch>
+```
 Here, path of the home page is ‘/’ and the component rendered against it is Home. When you visit ‘/products’, you would just see the “Home” component because v5 of the react-router always finds the first matching route, in this case “/” of “/products” is matched with the “/” route and hence the Home component gets rendered. In order to get the correct result, i.e to render the Product component on the “/products” route, we would have to put “exact” phrase in the “/” route, i.e. 
 ```javascript
 <Route exact path="/" component={Home} />
@@ -54,6 +78,15 @@ Here, path of the home page is ‘/’ and the component rendered against it is 
 ## Backend
 
 ### 1) What will be the order of the output?
+```javascript
+const fs = require("fs");
+fs.readFile("/poem.md", (err, data) => {
+if (err) return;
+console.log(data);
+});
+setTimeout(() => console.log("Runner!"), 0);
+console.log("Hello");
+```
 There will be 3 processes running when the server is started, asyncronously reading the file, the asyncrononus setTimeout function and the main thread which console logs “Hello”. So, “Hello” will be logged first and then the first process which gets completed first out of the Timeout or Reading file will get executed (In my opinion reading a file takes longer than the 0 second timeout in setTimeout) and then the last one
 
 ### 2) Write a program to run 7 threads and create server instances for each thread using the http module with master and child relationships.
@@ -70,11 +103,21 @@ Output
 ![image](https://user-images.githubusercontent.com/82509612/162847843-8846a183-bce0-4b7f-b478-b57554b482d2.png)
 
 ### 3) Write a middleware that does the following tasks:
+A. Checks the given JWT and authenticates it. (Assume you’re getting the secret
+key from the env so you can use process.env.SECRET_KEY)
+B. If the authentication is correct pass the control to the controller (write the required
+logic)
+C. Write required logic to handle the errors as well and return an adequate
+response
+
 authMiddleware.js
 
 ![image](https://user-images.githubusercontent.com/82509612/162847854-a8fd4e00-f1e0-4f3c-a232-3b01e76c0b3f.png)
 
 ### 4) What will happen with this command?
+```javascript
+db.sessionlog.createIndex({ lastUpdateTime: 1 }, { expireAfterSeconds: 1800 });
+```
 The command creates an index in the sessionlog collection of the db
 So, the index key is “lastUpdateTime” and its value being “1”
 And, { expireAfterSeconds: 1800 } is the options object that means the db retains documents in the collection for 1800 seconds
