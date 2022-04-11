@@ -1,17 +1,4 @@
-<div id="top"></div>
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/somil24/grid-raster/tree/main">
-  </a>
-
-  <h1 align="center">Nonceblox - Round 1</h1>
-
-  
-</div>
+# 			Nonceblox - Round 1
 
 
 
