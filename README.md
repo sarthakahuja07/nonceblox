@@ -92,7 +92,7 @@ There will be 3 processes running when the server is started, asyncronously read
 ### 2) Write a program to run 7 threads and create server instances for each thread using the http module with master and child relationships.
 Child.js
 
-![image](https://user-images.githubusercontent.com/82509612/162847815-809abf11-0347-4aba-8341-0e3dafbc3f68.png)
+![image](https://user-images.githubusercontent.com/82509612/162970188-532a4c58-91ee-4e3a-abad-06b28e0d900a.png)
 
 Index.js
 
